@@ -1,18 +1,20 @@
 import { generateRandomString, sha256, base64encode } from "./pkce.ts";
 
-async function RedirectToSpotify(): Promise<string> {
+export const RedirectToSpotify = async (): Promise<void> => {
   const SPOTIFY_CLIENT_ID = "d5695b7e4d344ab6abe136e567451ed1";
 
+  // Generate code verifier and challenge
   const codeVerifier = generateRandomString(64);
   const hashed = await sha256(codeVerifier);
   const codeChallenge = base64encode(hashed);
-  const redirectUri = "http://localhost:8080";
+  const redirectUri = "http://localhost:5173/";
 
+  // Store code verifier for later
+  window.localStorage.setItem("code_verifier", codeVerifier);
+
+  // Build the Spotify authorization URL
   const scope = "user-read-private user-read-email";
   const authUrl = new URL("https://accounts.spotify.com/authorize");
-
-  // generated in the previous step
-  window.localStorage.setItem("code_verifier", codeVerifier);
 
   const params = {
     response_type: "code",
@@ -24,10 +26,7 @@ async function RedirectToSpotify(): Promise<string> {
   };
 
   authUrl.search = new URLSearchParams(params).toString();
-  window.location.href = authUrl.toString();
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const code = urlParams.get("code");
-  return code;
-}
-export { RedirectToSpotify };
+  // Redirect to Spotify login
+  window.location.href = authUrl.toString();
+};

@@ -1,17 +1,3 @@
-.main {
-  color: red;
-}
-.body {
-  flex: content;
-  justify-content: center;
-}
-.body.header {
-  color: purple;
-}
-.body.text {
-  color: blue;
-}
-
-.ancestor .contents {
-  color: blue;
+button.main-button {
+  border: 10 px;
 }
