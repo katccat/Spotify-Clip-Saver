@@ -41,6 +41,9 @@ export const getToken = async (code: string): Promise<void> => {
 
     if (data.refresh_token) {
       localStorage.setItem("refresh_token", data.refresh_token);
+      console.log("There is a refresh token!");
+    } else {
+      console.log("There is no refresh token!");
     }
     console.log("Access token received:", data.access_token);
   } catch (error) {

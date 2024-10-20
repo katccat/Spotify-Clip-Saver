@@ -11,7 +11,7 @@ export const checkToken = async (): Promise<string | null> => {
     return null;
   }
 
-  // Check if the token is expired
+  //   Check if the token is expired
   const now = Date.now();
   console.log(now);
   if (now >= parseInt(expiresAt)) {

@@ -1,4 +1,4 @@
-import { useEffect, FC } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { RedirectToSpotify } from "../RedirectToSpotify";
 import { getToken } from "../getToken";
@@ -9,14 +9,12 @@ const LoginPage: FC = () => {
     await RedirectToSpotify();
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
-    console.log(code);
 
     if (code) {
       getToken(code); // Call getToken to exchange the authorization code for an access token
     }
   };
-
-  useEffect(() => {}, []); // Empty dependency array to run only once when the component mounts
+  // Empty dependency array to run only once when the component mounts
 
   return (
     <div>

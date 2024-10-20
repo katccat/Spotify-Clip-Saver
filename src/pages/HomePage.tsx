@@ -37,7 +37,11 @@ const HomePage: FC = () => {
   return (
     <div>
       <h1>Welcome to your Spotify Dashboard</h1>
-      {userData && <pre>{JSON.stringify(userData, null, 2)}</pre>}
+      {userData && (
+        <div>
+          <h3>{JSON.stringify(userData)}</h3>
+        </div>
+      )}
     </div>
   );
 };
