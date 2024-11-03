@@ -1,13 +1,14 @@
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const app = express();
-app.use(cors());
-
 app.use(
   cors({
     origin: "http://localhost:5173", // Your frontend's origin
   })
 );
+app.use(bodyParser.json());
+
 app.get("/api/spotify/me", async (req, res) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer")) {
@@ -28,8 +29,11 @@ app.get("/api/spotify/me", async (req, res) => {
 });
 
 app.post("/api/spotify/refresh", async (req, res) => {
-  const { refresh_token } = req.body.refresh_token;
-  const { spotifyID } = req.body.spotifyID;
+  const refresh_Token = req.body.refresh_token;
+  console.log(`${refresh_Token}\n`);
+  const spotify_id = req.body.spotify_ID;
+  console.log(spotify_id);
+
   const url = "https://accounts.spotify.com/api/token";
 
   const payload = {
@@ -38,14 +42,15 @@ app.post("/api/spotify/refresh", async (req, res) => {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     body: new URLSearchParams({
-      client_id: spotifyID,
+      client_id: spotify_id,
       grant_type: "refresh_token",
-      refresh_token: refresh_token,
+      refresh_token: refresh_Token,
     }),
   };
 
   try {
     const response = await fetch(url, payload);
+    console.log(response);
 
     if (!response.ok) {
       throw new Error("Failed to refresh token");

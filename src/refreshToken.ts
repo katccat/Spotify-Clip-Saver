@@ -14,11 +14,10 @@ export const refreshToken = async (): Promise<void> => {
       },
       body: JSON.stringify({
         refresh_token: refreshToken,
-        spotifyID: SPOTIFY_CLIENT_ID,
+        spotify_ID: SPOTIFY_CLIENT_ID,
       }),
     });
     const data = await response.json();
-    console.log(data);
     localStorage.setItem("refresh_token", data.refresh_token);
   } catch (error) {
     console.log(error);
