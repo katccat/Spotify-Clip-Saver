@@ -14,6 +14,7 @@ app.get("/api/spotify/me", async (req, res) => {
   if (!authHeader || !authHeader.startsWith("Bearer")) {
   }
   const token = authHeader.split(" ")[1];
+
   try {
     const response = await fetch("https://api.spotify.com/v1/me", {
       headers: {
@@ -31,7 +32,7 @@ app.get("/api/spotify/me", async (req, res) => {
 app.post("/api/spotify/refresh", async (req, res) => {
   const refresh_Token = req.body.refresh_token;
   console.log(`${refresh_Token}\n`);
-  const spotify_id = req.body.spotify_ID;
+  const spotify_id = req.body.spotify_id;
   console.log(spotify_id);
 
   const url = "https://accounts.spotify.com/api/token";

@@ -1,4 +1,4 @@
-import { refreshToken } from "./RefreshToken.ts";
+import { refreshToken } from "./refreshToken.ts";
 
 export const checkToken = async (): Promise<string | null> => {
   const accessToken = localStorage.getItem("access_token");

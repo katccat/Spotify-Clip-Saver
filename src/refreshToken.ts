@@ -1,5 +1,5 @@
 export const refreshToken = async (): Promise<void> => {
-  const SPOTIFY_CLIENT_ID = "d5695b7e4d344ab6abe136e567451ed1";
+  const SPOTIFY_CLIENT_ID = "90fbdf7cd7f94940b7d90aef90c967a6";
   const refreshToken = localStorage.getItem("refresh_token");
 
   if (!refreshToken) {
@@ -14,7 +14,7 @@ export const refreshToken = async (): Promise<void> => {
       },
       body: JSON.stringify({
         refresh_token: refreshToken,
-        spotify_ID: SPOTIFY_CLIENT_ID,
+        spotify_id: SPOTIFY_CLIENT_ID,
       }),
     });
     const data = await response.json();
